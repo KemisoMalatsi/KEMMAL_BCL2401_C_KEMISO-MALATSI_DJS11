@@ -108,77 +108,20 @@
     margin-top: 1rem;
   }
   
-  /* Players */
-
-  .player {
-    height: 10%;
-    background-color: black;
+  .search-bar {
+    margin-top: 10px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    padding: 0 1rem;
+    justify-content: center;
   }
   
-  .player-left {
-    display: none;
+  .search-input {
+    width: 80%;
+    height: 2.5rem; 
+    padding: 0.5rem; 
+    font-size: 1rem; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
   }
   
-  @media (min-width: 1024px) {
-    .player-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-  }
   
-  .player-image {
-    width: 3rem;
-  }
-  
-  .player-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    gap: 0.25rem;
-  }
-  
-  .player-controls {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .control-icon {
-    width: 1rem;
-    cursor: pointer;
-  }
-
-  .timeline {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem; 
-  }
-  
-  .timeline-bar {
-    width: 25vw;
-    height: 0.25rem;
-    max-width: 500px;
-    background-color: #D1D5DB; 
-    border-radius: 9999px; 
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .progress-bar {
-    height: 0.25rem; 
-    border: none; 
-    width: 0; 
-    background-color: #065F46; 
-    border-radius: 9999px; 
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
   
