@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from './components/Sidebar';
 import './index.css'; 
 
 const App = () => {
@@ -9,7 +9,7 @@ const App = () => {
         <Sidebar />
       </div>
     </div>
-  );
+  );  
 };
 
 export default App

@@ -1,6 +1,6 @@
 import React from 'react';
-import { assets } from '../src/assets/assets';
-import './index.css'; 
+import { assets } from '../assets/assets';
+import '../index.css' 
 
 const Sidebar = () => {
   return (
