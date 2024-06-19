@@ -124,22 +124,19 @@
   }
 
   /* Podcasts */
-
-  /* src/index.css */
 .app {
   display: flex;
 }
 
 .sidebar {
-  width: 250px; /* Adjust as needed */
-  background-color: #f8f9fa; /* Example background color */
-  /* Other styles for the sidebar */
+  width: 250px;
+  background-color: #f8f9fa; 
 }
 
 .main-content {
   flex-grow: 1;
   padding: 20px;
-  /* Other styles for the main content */
+
 }
 
   
