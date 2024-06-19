@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './components/Sidebar';
-import './index.css'; 
+import Player from './components/Player'; 
 
 const App = () => {
   return (
@@ -8,6 +8,7 @@ const App = () => {
       <div className="container">
         <Sidebar />
       </div>
+      <Player />
     </div>
   );  
 };

@@ -1,3 +1,4 @@
+/* Sidebar */
 .sidebar {
     width: 25%;
     height: 100%;
@@ -44,7 +45,7 @@
     font-weight: bold;
   }
   
-  /* Bottom section styles */
+  
   .bottom-section {
     background-color: #2563EB;
     height: 85%;
@@ -106,4 +107,78 @@
   .mt-4 {
     margin-top: 1rem;
   }
+  
+  /* Players */
+
+  .player {
+    height: 10%;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 0 1rem;
+  }
+  
+  .player-left {
+    display: none;
+  }
+  
+  @media (min-width: 1024px) {
+    .player-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+  
+  .player-image {
+    width: 3rem;
+  }
+  
+  .player-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    gap: 0.25rem;
+  }
+  
+  .player-controls {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .control-icon {
+    width: 1rem;
+    cursor: pointer;
+  }
+
+  .timeline {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem; 
+  }
+  
+  .timeline-bar {
+    width: 25vw;
+    height: 0.25rem;
+    max-width: 500px;
+    background-color: #D1D5DB; 
+    border-radius: 9999px; 
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .progress-bar {
+    height: 0.25rem; 
+    border: none; 
+    width: 0; 
+    background-color: #065F46; 
+    border-radius: 9999px; 
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
   
