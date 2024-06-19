@@ -1,3 +1,112 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* index.css */
+
+/* General styles */
+.sidebar {
+    width: 25%;
+    height: 100%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: white;
+  }
+  
+  .sidebar-lg {
+    display: none;
+  }
+  
+  @media (min-width: 1024px) {
+    .sidebar-lg {
+      display: flex;
+    }
+  }
+  
+  /* Top section styles */
+  .top-section {
+    background-color: #2563EB;
+    height: 15%;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .top-section-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-left: 2rem;
+    cursor: pointer;
+  }
+  
+  .top-section-icon {
+    width: 1.5rem;
+  }
+  
+  .top-section-text {
+    font-weight: bold;
+  }
+  
+  /* Bottom section styles */
+  .bottom-section {
+    background-color: #2563EB;
+    height: 85%;
+    border-radius: 0.5rem;
+  }
+  
+  .bottom-section-content {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .bottom-section-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .bottom-section-icon-large {
+    width: 2rem;
+  }
+  
+  .bottom-section-icon-small {
+    width: 1.25rem;
+  }
+  
+  .bottom-section-text {
+    font-weight: 600;
+  }
+  
+  .playlist {
+    padding: 1rem;
+    background-color: #2563EB;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.25rem;
+    padding-left: 1rem;
+  }
+  
+  .playlist-light {
+    font-weight: 300;
+  }
+  
+  .playlist-button {
+    padding: 0.375rem 1rem;
+    background-color: white;
+    font-size: 15px;
+    color: black;
+    border-radius: 9999px;
+    margin-top: 1rem;
+  }
+  
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  

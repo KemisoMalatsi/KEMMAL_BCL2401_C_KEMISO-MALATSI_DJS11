@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Sidebar from './Sidebar';
+import './index.css'; 
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div>
+      <div className="container">
+        <Sidebar />
+      </div>
+    </div>
+  );
+};
 
 export default App
