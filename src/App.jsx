@@ -1,21 +1,24 @@
+// src/App.js
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import Home from './components/Home';
+import Home from './components/Home'; // Assuming you have a Home component
+import Podcasts from './components/Podcasts';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div className="app-container">
+    <Router>
+      <div className="app">
         <Sidebar />
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* Add other routes here */}
+            <Route path="/podcasts" element={<Podcasts />} />
+            {/* Add other routes as needed */}
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 };
 

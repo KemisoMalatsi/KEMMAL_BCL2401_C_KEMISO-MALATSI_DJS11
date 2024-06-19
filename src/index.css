@@ -122,6 +122,26 @@
     border: 1px solid #ccc; 
     border-radius: 5px; 
   }
+
+  /* Podcasts */
+
+  /* src/index.css */
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px; /* Adjust as needed */
+  background-color: #f8f9fa; /* Example background color */
+  /* Other styles for the sidebar */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  /* Other styles for the main content */
+}
+
   
   
   
