@@ -1,12 +1,12 @@
-// Seasons.js or Seasons.jsx
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../index.css'; 
 
 const Seasons = () => {
   const { showId } = useParams();
   const [show, setShow] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchShow = async () => {
@@ -25,6 +25,10 @@ const Seasons = () => {
     fetchShow();
   }, [showId]);
 
+  const handleSeasonClick = (seasonId, seasonTitle) => {
+    navigate(`/shows/${seasonId}`, { state: { seasonTitle } });
+  };
+
   if (loading) return <div>Loading...</div>;
   if (!show) return <div>No show data available</div>;
 
@@ -35,7 +39,11 @@ const Seasons = () => {
       <div className="seasons-grid">
         {show.seasons && show.seasons.length > 0 ? (
           show.seasons.map((season) => (
-            <div key={season.id} className="season-card">
+            <div
+              key={season.id}
+              className="season-card"
+              onClick={() => handleSeasonClick(season.id, season.title)}
+            >
               <img src={season.image} alt={season.title} className="season-image" />
               <h3>{season.title}</h3>
             </div>

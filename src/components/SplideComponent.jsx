@@ -3,11 +3,11 @@ import Splide from '@splidejs/splide';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import '@splidejs/splide/dist/css/splide.min.css';
 
-
-const Home = () => {
+const SplideComponent = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
+    // Fetch images from the API
     const fetchImages = async () => {
       try {
         const response = await fetch('https://your-api-endpoint.com/images');
@@ -32,6 +32,7 @@ const Home = () => {
 
   useEffect(() => {
     if (images.length > 0) {
+      // Initialize Splide slider
       const splide = new Splide('.splide', {
         type: 'loop',
         drag: 'free',
@@ -55,21 +56,18 @@ const Home = () => {
   }, [images]);
 
   return (
-    <div>
-      <h1>Featured Images</h1>
-      <div className="splide">
-        <div className="splide__track">
-          <ul className="splide__list">
-            {images.map((image, index) => (
-              <li className="splide__slide" key={index}>
-                <img src={image.url} alt={image.alt || 'Image'} />
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div className="splide">
+      <div className="splide__track">
+        <ul className="splide__list">
+          {images.map((image, index) => (
+            <li className="splide__slide" key={index}>
+              <img src={image.url} alt={image.alt || 'Image'} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default SplideComponent;
