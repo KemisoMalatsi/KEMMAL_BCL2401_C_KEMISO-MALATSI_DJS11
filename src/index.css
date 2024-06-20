@@ -1,7 +1,7 @@
 /* Sidebar */
 .sidebar {
     width: 25%;
-    height: 100%;
+    height: 100%vh;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@
   
   /* Top section styles */
   .top-section {
-    background-color: #2563EB;
+    background-color: #1DB954;
     height: 15%;
     border-radius: 0.5rem;
     display: flex;
@@ -47,7 +47,7 @@
   
   
   .bottom-section {
-    background-color: #2563EB;
+    background-color: #1DB954;
     height: 85%;
     border-radius: 0.5rem;
   }
@@ -79,7 +79,7 @@
   
   .playlist {
     padding: 1rem;
-    background-color: #2563EB;
+    background-color: #1DB954;
     margin: 0.5rem;
     border-radius: 0.5rem;
     font-weight: 600;
@@ -139,6 +139,16 @@
 
 }
 
-  
-  
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.image-grid img {
+  max-width: 100%;
+  height: auto;
+}
+
+
   
