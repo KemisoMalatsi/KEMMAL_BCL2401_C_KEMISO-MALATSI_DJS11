@@ -1,7 +1,7 @@
 // Seasons.js or Seasons.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import '../index.css'; // Import the CSS file for styling
+import '../index.css'; 
 
 const Seasons = () => {
   const { showId } = useParams();
@@ -31,6 +31,7 @@ const Seasons = () => {
   return (
     <div>
       <h2>{show.title}</h2>
+      <p>{show.description}</p>
       <div className="seasons-grid">
         {show.seasons && show.seasons.length > 0 ? (
           show.seasons.map((season) => (

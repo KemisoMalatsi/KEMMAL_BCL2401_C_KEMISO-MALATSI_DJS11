@@ -20,15 +20,15 @@ const Podcasts = () => {
     fetchPreviews();
   }, []);
 
-  const handleImageClick = (showId) => {
-    navigate(`/seasons/${showId}`);
+  const handleImageClick = (showId, description) => {
+    navigate(`/seasons/${showId}`, { state: { description } });
   };
 
   return (
     <div>
       <div className="image-grid">
         {previews.map((preview) => (
-          <div key={preview.id} onClick={() => handleImageClick(preview.id)}>
+          <div key={preview.id} onClick={() => handleImageClick(preview.id, preview.description)} className="podcast-card">
             <img src={preview.image} alt={preview.title} />
             <div>
               <h3>{preview.title}</h3>
