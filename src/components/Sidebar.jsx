@@ -40,7 +40,7 @@ const Sidebar = ({ handleSortAZ }) => {
             <img className='bottom-section-icon-small' src={assets.plus_icon} alt='Plus' />
           </div>
           <div className='bottom-section-item' onClick={handleSortAZ}>
-            {/* Ensure this item triggers the sorting function */}
+            
             <img className='bottom-section-icon-small' src={assets.sort_icon} alt='Sort' />
             <p className='bottom-section-text'>Sort A-Z</p>
           </div>
