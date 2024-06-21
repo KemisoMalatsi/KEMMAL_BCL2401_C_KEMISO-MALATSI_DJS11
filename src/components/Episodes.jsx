@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import '../index.css'; 
+import '../index.css';
 
-const Shows = () => {
+const Episodes = () => {
   const { seasonId } = useParams();
   const [season, setSeason] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log('Fetching season with ID:', seasonId); // Debugging statement
     const fetchSeason = async () => {
       try {
-        const response = await fetch(`/api/season/${seasonId}`); // Using the proxy
+        const response = await fetch(`/api/season/${seasonId}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
-        console.log('Fetched season data:', data); // Log the fetched data
+        console.log('Fetched season data:', data);
         setSeason(data);
       } catch (error) {
         console.error('Error fetching season data:', error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -25,6 +31,7 @@ const Shows = () => {
   }, [seasonId]);
 
   if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   if (!season) return <div>No season data available</div>;
 
   return (
@@ -47,4 +54,4 @@ const Shows = () => {
   );
 };
 
-export default Shows;
+export default Episodes;

@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../index.css'; 
+import '../index.css';
 
 const Seasons = () => {
   const { showId } = useParams();
   const [show, setShow] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchShow = async () => {
       try {
-        const response = await fetch(`/api/id/${showId}`); // Using the proxy
+        const response = await fetch(`/api/id/${showId}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
-        console.log('Fetched show data:', data); // Log the fetched data
+        console.log('Fetched show data:', data);
         setShow(data);
       } catch (error) {
         console.error('Error fetching show data:', error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -26,10 +31,12 @@ const Seasons = () => {
   }, [showId]);
 
   const handleSeasonClick = (seasonId) => {
+    console.log('Navigating to season with ID:', seasonId); // Debugging statement
     navigate(`/shows/${seasonId}`);
   };
 
   if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   if (!show) return <div>No show data available</div>;
 
   return (
