@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import Podcasts from './components/Podcasts';
 import Seasons from './components/Seasons';
-import Shows from './components/Shows';
+import Episodes from './components/Episodes';
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/podcasts" element={<Podcasts />} />
             <Route path="/seasons/:showId" element={<Seasons />} />
-            <Route path="/shows/:seasonId" element={<Shows />} />
+            <Route path="/podcast/:podcastId/seasons/:seasonId" component={Episodes} />
           </Routes>
         </div>
       </div>

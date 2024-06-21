@@ -11,7 +11,7 @@ const Seasons = () => {
   useEffect(() => {
     const fetchShow = async () => {
       try {
-        const response = await fetch(`https://podcast-api.netlify.app/id/${showId}`);
+        const response = await fetch(`/api/id/${showId}`); // Using the proxy
         const data = await response.json();
         console.log('Fetched show data:', data); // Log the fetched data
         setShow(data);
@@ -25,8 +25,8 @@ const Seasons = () => {
     fetchShow();
   }, [showId]);
 
-  const handleSeasonClick = (seasonId, seasonTitle) => {
-    navigate(`/shows/${seasonId}`, { state: { seasonTitle } });
+  const handleSeasonClick = (seasonId) => {
+    navigate(`/shows/${seasonId}`);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -39,11 +39,7 @@ const Seasons = () => {
       <div className="seasons-grid">
         {show.seasons && show.seasons.length > 0 ? (
           show.seasons.map((season) => (
-            <div
-              key={season.id}
-              className="season-card"
-              onClick={() => handleSeasonClick(season.id, season.title)}
-            >
+            <div key={season.id} className="season-card" onClick={() => handleSeasonClick(season.id)}>
               <img src={season.image} alt={season.title} className="season-image" />
               <h3>{season.title}</h3>
             </div>

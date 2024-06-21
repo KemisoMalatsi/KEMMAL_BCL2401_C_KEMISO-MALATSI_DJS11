@@ -1,4 +1,3 @@
-// Podcasts.js or Podcasts.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +8,7 @@ const Podcasts = () => {
   useEffect(() => {
     const fetchPreviews = async () => {
       try {
-        const response = await fetch('https://podcast-api.netlify.app');
+        const response = await fetch('/api'); // Using the proxy
         const data = await response.json();
         setPreviews(data);
       } catch (error) {
