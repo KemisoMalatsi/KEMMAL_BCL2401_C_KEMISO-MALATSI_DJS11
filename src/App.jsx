@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import Podcasts from './components/Podcasts';
 import Seasons from './components/Seasons';
-import Episodes from './components/Episodes';
+import Episodes from './components/Episodes'; // Import the Episodes component
 
 const App = () => (
   <Router>
@@ -14,7 +14,7 @@ const App = () => (
         <Route path="/" element={<Home />} />
         <Route path="/podcasts" element={<Podcasts />} />
         <Route path="/seasons/:showId" element={<Seasons />} />
-        <Route path="/shows/:seasonId" element={<Episodes />} />
+        <Route path="/seasons/:showId/episodes/:seasonIndex" element={<Episodes />} /> {/* New route for Episodes */}
       </Routes>
     </div>
   </Router>

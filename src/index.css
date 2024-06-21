@@ -152,37 +152,106 @@
 
 /* Seasons */
 
-
 .seasons-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  padding: 20px;
 }
 
-.season-card {
-  background: #fff;
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.season-card, .episode-card {
+  border: 1px solid #ccc;
+  padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.2s;
-  padding: 16px;
   text-align: center;
+  cursor: pointer;
 }
 
-.season-card:hover {
-  transform: scale(1.05);
+.season-card img, .episode-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.season-card h3, .episode-card h3 {
+  margin-top: 10px;
+  font-size: 1.2em;
 }
 
 .season-image {
-  width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 10px;
+  max-width: 100%;
+  border-radius: 8px;
 }
 
-.season-card h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: #333;
+.seasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.season-card, .episode-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.season-card img, .episode-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.season-card h3, .episode-card h3 {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.season-image {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.episode-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.episode-card h3 {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.episode-card p {
+  margin: 10px 0;
+}
+
+.episode-card audio {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 5px;
 }

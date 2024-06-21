@@ -3,24 +3,16 @@ import { useNavigate } from 'react-router-dom';
 
 const Podcasts = () => {
   const [previews, setPreviews] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPreviews = async () => {
       try {
         const response = await fetch('https://podcast-api.netlify.app');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
         const data = await response.json();
         setPreviews(data);
       } catch (error) {
         console.error('Error fetching previews:', error);
-        setError(error.message);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -28,11 +20,8 @@ const Podcasts = () => {
   }, []);
 
   const handleImageClick = (showId, description) => {
-    navigate(`/seasons/${showId}`);
+    navigate(`/seasons/${showId}`, { state: { description } });
   };
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>

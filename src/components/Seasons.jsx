@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import '../index.css';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import '../index.css'; // Ensure you have appropriate styles for the grid
 
 const Seasons = () => {
   const { showId } = useParams();
+  const location = useLocation();
+  const { description } = location.state;
   const [show, setShow] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchShow = async () => {
       try {
-        const response = await fetch(`/api/id/${showId}`);
+        const response = await fetch(`https://podcast-api.netlify.app/id/${showId}`);
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`Error fetching show data: ${response.statusText}`);
         }
         const data = await response.json();
         console.log('Fetched show data:', data);
         setShow(data);
       } catch (error) {
         console.error('Error fetching show data:', error);
-        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -30,23 +30,21 @@ const Seasons = () => {
     fetchShow();
   }, [showId]);
 
-  const handleSeasonClick = (seasonId) => {
-    console.log('Navigating to season with ID:', seasonId); // Debugging statement
-    navigate(`/shows/${seasonId}`);
+  const handleSeasonClick = (seasonIndex) => {
+    navigate(`/seasons/${showId}/episodes/${seasonIndex}`);
   };
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
   if (!show) return <div>No show data available</div>;
 
   return (
     <div>
       <h2>{show.title}</h2>
-      <p>{show.description}</p>
+      <p>{description}</p>
       <div className="seasons-grid">
         {show.seasons && show.seasons.length > 0 ? (
-          show.seasons.map((season) => (
-            <div key={season.id} className="season-card" onClick={() => handleSeasonClick(season.id)}>
+          show.seasons.map((season, index) => (
+            <div key={index} className="season-card" onClick={() => handleSeasonClick(index)}>
               <img src={season.image} alt={season.title} className="season-image" />
               <h3>{season.title}</h3>
             </div>
