@@ -95,7 +95,25 @@
     font-weight: 300;
   }
   
-  .playlist-button {
+  .favourite-button {
+    padding: 0.375rem 1rem;
+    background-color: white;
+    font-size: 15px;
+    color: black;
+    border-radius: 9999px;
+    margin-top: 1rem;
+  }
+
+  .sort-a-button {
+    padding: 0.375rem 1rem;
+    background-color: white;
+    font-size: 15px;
+    color: black;
+    border-radius: 9999px;
+    margin-top: 1rem;
+  }
+
+  .sort-z-button {
     padding: 0.375rem 1rem;
     background-color: white;
     font-size: 15px;

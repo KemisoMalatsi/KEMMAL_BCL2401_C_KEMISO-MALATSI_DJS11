@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import '../index.css'; // Ensure you have appropriate styles for the grid
 
@@ -6,6 +6,7 @@ const Episodes = () => {
   const { showId, seasonIndex } = useParams();
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentAudio, setCurrentAudio] = useState(null);
 
   useEffect(() => {
     const fetchEpisodes = async () => {
@@ -28,6 +29,13 @@ const Episodes = () => {
     fetchEpisodes();
   }, [showId, seasonIndex]);
 
+  const handlePlay = (event) => {
+    if (currentAudio && currentAudio !== event.target) {
+      currentAudio.pause();
+    }
+    setCurrentAudio(event.target);
+  };
+
   if (loading) return <div>Loading...</div>;
   if (!episodes.length) return <div>No episodes available</div>;
 
@@ -39,7 +47,7 @@ const Episodes = () => {
           <div key={episode.id} className="episode-card">
             <h3>{episode.title}</h3>
             <p>{episode.description}</p>
-            <audio controls>
+            <audio controls onPlay={handlePlay}>
               <source src={episode.file} />
               Your browser does not support the audio element.
             </audio>

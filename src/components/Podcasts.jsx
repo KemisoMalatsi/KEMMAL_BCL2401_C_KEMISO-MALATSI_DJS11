@@ -23,6 +23,11 @@ const Podcasts = () => {
     navigate(`/seasons/${showId}`, { state: { description } });
   };
 
+  const handleSortAZ = () => {
+    const sortedPreviews = [...previews].sort((a, b) => a.title.localeCompare(b.title));
+    setPreviews(sortedPreviews);
+  };
+
   return (
     <div>
       <div className="image-grid">
