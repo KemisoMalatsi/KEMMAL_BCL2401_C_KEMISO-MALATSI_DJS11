@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import '../index.css'; 
+import '../index.css';
 
 const Seasons = () => {
   const { showId } = useParams();
@@ -38,7 +38,7 @@ const Seasons = () => {
   if (!show) return <div>No show data available</div>;
 
   return (
-    <div>
+    <div className="main-content">
       <h2>{show.title}</h2>
       <p>{description}</p>
       <div className="seasons-grid">
@@ -47,6 +47,7 @@ const Seasons = () => {
             <div key={index} className="season-card" onClick={() => handleSeasonClick(index)}>
               <img src={season.image} alt={season.title} className="season-image" />
               <h3>{season.title}</h3>
+              <small>Updated: {new Date(season.updated).toLocaleDateString()}</small>
             </div>
           ))
         ) : (

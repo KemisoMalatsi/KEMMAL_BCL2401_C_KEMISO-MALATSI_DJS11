@@ -36,8 +36,6 @@ const Sidebar = ({ handleSortAZ }) => {
             <p className='bottom-section-text'>Your Podcasts</p>
           </div>
           <div className='bottom-section-item'>
-            <img className='bottom-section-icon-small' src={assets.arrow_icon} alt='Arrow' />
-            <img className='bottom-section-icon-small' src={assets.plus_icon} alt='Plus' />
           </div>
           <div className='bottom-section-item' onClick={handleSortAZ}>
           </div>
@@ -45,11 +43,8 @@ const Sidebar = ({ handleSortAZ }) => {
         <div className='playlist' >
           <h1>Create your first playlist</h1>
           <p className='playlist-light'>It's easy, we will help you</p>
-          <button className='favourite-button'>Add to Favourites</button>
           <div className='bottom-section-item' onClick={handleSortAZ}>
-            <button className='sort-a-button'>Sort A-Z</button>
           </div>
-          <button className='sort-z-button'>Sort Z-A</button>
         </div>
         <div className='playlist mt-4'>
           <h1>Let's find some podcasts to follow</h1>

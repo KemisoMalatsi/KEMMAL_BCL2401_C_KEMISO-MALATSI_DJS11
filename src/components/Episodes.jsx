@@ -40,14 +40,14 @@ const Episodes = () => {
   if (!episodes.length) return <div>No episodes available</div>;
 
   return (
-    <div>
+    <div className="main-content">
       <h2>Episodes</h2>
       <div className="episodes-grid">
         {episodes.map((episode) => (
           <div key={episode.id} className="episode-card">
             <h3>{episode.title}</h3>
-            <p>{episode.description}</p>
             <small>Updated: {new Date(episode.updated).toLocaleDateString()}</small>
+            <p>{episode.description}</p>
             <audio controls onPlay={handlePlay}>
               <source src={episode.file} />
               Your browser does not support the audio element.
