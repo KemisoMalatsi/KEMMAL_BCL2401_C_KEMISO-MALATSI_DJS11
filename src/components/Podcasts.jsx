@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
-const Podcasts = () => {
+const Podcasts = ({ sortCriteria }) => {
   const [podcasts, setPodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -16,7 +16,21 @@ const Podcasts = () => {
         }
         const data = await response.json();
         console.log('Fetched podcasts data:', data);
-        setPodcasts(data);
+
+        // Sorting logic based on sortCriteria
+        let sortedPodcasts = [...data];
+        switch (sortCriteria) {
+          case 'az':
+            sortedPodcasts.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+          case 'za':
+            sortedPodcasts.sort((a, b) => b.title.localeCompare(a.title));
+            break;
+          default:
+            break;
+        }
+
+        setPodcasts(sortedPodcasts);
       } catch (error) {
         console.error('Error fetching podcasts data:', error);
       } finally {
@@ -25,7 +39,7 @@ const Podcasts = () => {
     };
 
     fetchPodcasts();
-  }, []);
+  }, [sortCriteria]);
 
   const handlePodcastClick = (podcast) => {
     navigate(`/seasons/${podcast.id}`, { state: { description: podcast.description } });

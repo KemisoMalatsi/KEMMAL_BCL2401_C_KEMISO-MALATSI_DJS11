@@ -12,11 +12,12 @@ const Sidebar = ({ handleSort }) => {
   const toggleSearchBar = () => setShowSearchBar(!showSearchBar);
 
   const handleSortChange = (event) => {
-    handleSort(event.target.value);
+    handleSort(event.target.value); // Passes the selected sort value to parent component
   };
 
   return (
     <div className='sidebar sidebar-lg'>
+      {/* Top Section */}
       <div className='top-section'>
         <div className='top-section-item' onClick={goToHome}>
           <img className='top-section-icon' src={assets.home_icon} alt='Home' />
@@ -32,13 +33,18 @@ const Sidebar = ({ handleSort }) => {
           </div>
         )}
       </div>
+
+      {/* Bottom Section */}
       <div className='bottom-section'>
+        {/* Podcasts Section */}
         <div className='bottom-section-content'>
           <div className='bottom-section-item' onClick={goToPodcasts}>
             <img className='bottom-section-icon-large' src={assets.stack_icon} alt='Podcasts' />
             <p className='bottom-section-text'>Your Podcasts</p>
           </div>
         </div>
+
+        {/* Sort Section */}
         <div className='sort-section'>
           <label htmlFor='sort-dropdown' className='sort-label'>Sort by:</label>
           <select id='sort-dropdown' className='sort-dropdown' onChange={handleSortChange}>
@@ -49,6 +55,8 @@ const Sidebar = ({ handleSort }) => {
             <option value='genres'>Genres</option>
           </select>
         </div>
+
+        {/* Playlist Sections */}
         <div className='playlist'>
           <h1>Create your first playlist</h1>
           <p className='playlist-light'>It's easy, we will help you</p>
