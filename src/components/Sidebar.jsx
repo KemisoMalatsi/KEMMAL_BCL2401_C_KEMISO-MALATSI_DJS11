@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import '../index.css';
 
 const Sidebar = ({ handleSort, handleSearch }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
+  useEffect(() => {
+    // Only show search bar if the user is on the Podcasts page
+    if (location.pathname === '/podcasts') {
+      setShowSearchBar(true);
+    } else {
+      setShowSearchBar(false);
+    }
+  }, [location.pathname]);
+
   const goToHome = () => navigate('/');
   const goToPodcasts = () => navigate('/podcasts');
-  const toggleSearchBar = () => setShowSearchBar(!showSearchBar);
 
   const handleSortChange = (event) => {
     handleSort(event.target.value); // Passes the selected sort value to parent component
@@ -29,10 +38,12 @@ const Sidebar = ({ handleSort, handleSearch }) => {
           <img className='top-section-icon' src={assets.home_icon} alt='Home' />
           <p className='top-section-text'>Home</p>
         </div>
-        <div className='top-section-item' onClick={toggleSearchBar}>
-          <img className='top-section-icon' src={assets.search_icon} alt='Search' />
-          <p className='top-section-text'>Search</p>
-        </div>
+        {location.pathname === '/podcasts' && (
+          <div className='top-section-item' onClick={() => setShowSearchBar(!showSearchBar)}>
+            <img className='top-section-icon' src={assets.search_icon} alt='Search' />
+            <p className='top-section-text'>Search</p>
+          </div>
+        )}
         {showSearchBar && (
           <div className='search-bar'>
             <input
