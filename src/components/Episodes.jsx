@@ -1,7 +1,6 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { FaHeart } from 'react-icons/fa';
 import '../index.css';
 
 const Episodes = () => {
@@ -9,6 +8,7 @@ const Episodes = () => {
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentAudio, setCurrentAudio] = useState(null);
+  const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
 
   useEffect(() => {
     const fetchEpisodes = async () => {
@@ -38,6 +38,14 @@ const Episodes = () => {
     setCurrentAudio(event.target);
   };
 
+  const toggleFavorite = (episodeId) => {
+    setFavoriteEpisodes((prevFavorites) =>
+      prevFavorites.includes(episodeId)
+        ? prevFavorites.filter((id) => id !== episodeId)
+        : [...prevFavorites, episodeId]
+    );
+  };
+
   if (loading) return <div>Loading...</div>;
   if (!episodes.length) return <div>No episodes available</div>;
 
@@ -45,14 +53,18 @@ const Episodes = () => {
     <div className="main-content">
       <h2>Episodes</h2>
       <div className="episodes-grid">
-        {episodes.map((episode) => (
-          <div key={episode.id} className="episode-card">
+        {episodes.map((episode, index) => (
+          <div key={episode.id || index} className="episode-card">
             <h3>{episode.title}</h3>
             <p>{episode.description}</p>
             <audio controls onPlay={handlePlay}>
               <source src={episode.file} />
               Your browser does not support the audio element.
             </audio>
+            <FaHeart
+              className={`heart-icon ${favoriteEpisodes.includes(episode.id) ? 'favorite' : ''}`}
+              onClick={() => toggleFavorite(episode.id)}
+            />
           </div>
         ))}
       </div>
