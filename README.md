@@ -1,2 +1,2 @@
 Refresh
-- [Netlify LINK]()
+- [Netlify Link](https://kemiso-podcast-app.netlify.app/)
