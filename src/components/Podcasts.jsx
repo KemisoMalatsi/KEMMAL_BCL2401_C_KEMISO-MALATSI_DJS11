@@ -1,42 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../index.css';
 
 const Podcasts = () => {
-  const [previews, setPreviews] = useState([]);
+  const [podcasts, setPodcasts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPreviews = async () => {
+    const fetchPodcasts = async () => {
       try {
-        const response = await fetch('https://podcast-api.netlify.app');
+        const response = await fetch('https://podcast-api.netlify.app/');
+        if (!response.ok) {
+          throw new Error(`Error fetching podcasts: ${response.statusText}`);
+        }
         const data = await response.json();
-        setPreviews(data);
+        console.log('Fetched podcasts data:', data);
+        setPodcasts(data);
       } catch (error) {
-        console.error('Error fetching previews:', error);
+        console.error('Error fetching podcasts data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchPreviews();
+    fetchPodcasts();
   }, []);
 
-  const handleImageClick = (showId, description) => {
-    navigate(`/seasons/${showId}`, { state: { description } });
+  const handlePodcastClick = (podcast) => {
+    navigate(`/seasons/${podcast.id}`, { state: { description: podcast.description } });
   };
 
-  const handleSortAZ = () => {
-    const sortedPreviews = [...previews].sort((a, b) => a.title.localeCompare(b.title));
-    setPreviews(sortedPreviews);
-  };
+  if (loading) return <div>Loading...</div>;
+  if (!podcasts.length) return <div>No podcasts available</div>;
 
   return (
-    <div>
-      <div className="image-grid">
-        {previews.map((preview) => (
-          <div key={preview.id} onClick={() => handleImageClick(preview.id, preview.description)} className="podcast-card">
-            <img src={preview.image} alt={preview.title} />
-            <div>
-              <h3>{preview.title}</h3>
-            </div>
+    <div className="main-content">
+      <h2>Podcasts</h2>
+      <div className="podcasts-grid">
+        {podcasts.map((podcast) => (
+          <div key={podcast.id} className="podcast-card" onClick={() => handlePodcastClick(podcast)}>
+            <img src={podcast.image} alt={podcast.title} />
+            <h3>{podcast.title}</h3>
+            <small>Updated: {new Date(podcast.updated).toLocaleDateString()}</small>
           </div>
         ))}
       </div>

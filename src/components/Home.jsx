@@ -38,12 +38,16 @@ const Home = () => {
 
   return (
     <div className="main-content">
-      <h1 className='h1'>Welcome! Explore our latest Podcast</h1>
+      <h1>Welcome! Explore the latest Podcasts</h1>
       <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>
         {podcasts.map((podcast) => (
           <div key={podcast.id} onClick={() => handlePodcastClick(podcast)} className="carousel-item">
             <img src={podcast.image} alt={podcast.title} />
-            <p className="legend">{podcast.title}</p>
+            <p className="legend">
+              {podcast.title}
+              <br />
+              <small>Updated: {new Date(podcast.updated).toLocaleDateString()}</small>
+            </p>
           </div>
         ))}
       </Carousel>
