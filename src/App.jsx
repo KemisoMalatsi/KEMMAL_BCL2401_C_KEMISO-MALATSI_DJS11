@@ -10,14 +10,12 @@ const App = () => (
   <Router>
     <div className="app">
       <Sidebar />
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/podcasts" element={<Podcasts />} />
-          <Route path="/seasons/:showId" element={<Seasons />} />
-          <Route path="/seasons/:showId/episodes/:seasonIndex" element={<Episodes />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/podcasts" element={<Podcasts />} />
+        <Route path="/seasons/:showId" element={<Seasons />} />
+        <Route path="/seasons/:showId/episodes/:seasonIndex" element={<Episodes />} />
+      </Routes>
     </div>
   </Router>
 );

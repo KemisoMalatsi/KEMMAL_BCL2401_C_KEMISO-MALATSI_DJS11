@@ -295,10 +295,14 @@
   box-sizing: border-box;
 }
 
+.carousel-item {
+  cursor: pointer;
+}
+
 .carousel .slide img {
   width: 50%;
   height: auto;
-  max-height: 550px;
+  max-height: 580px;
 }
 
 .carousel .legend {
