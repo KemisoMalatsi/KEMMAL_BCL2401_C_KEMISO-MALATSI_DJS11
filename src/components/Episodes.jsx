@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import '../index.css'; // Ensure you have appropriate styles for the grid
+import '../index.css';
 
 const Episodes = () => {
   const { showId, seasonIndex } = useParams();

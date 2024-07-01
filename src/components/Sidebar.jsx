@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { assets } from '../assets/assets'; // Ensure this path is correct
+import { assets } from '../assets/assets'; 
 import '../index.css';
 
 const Sidebar = ({ handleSortAZ }) => {
@@ -40,9 +40,6 @@ const Sidebar = ({ handleSortAZ }) => {
             <img className='bottom-section-icon-small' src={assets.plus_icon} alt='Plus' />
           </div>
           <div className='bottom-section-item' onClick={handleSortAZ}>
-            
-            <img className='bottom-section-icon-small' src={assets.sort_icon} alt='Sort' />
-            <p className='bottom-section-text'>Sort A-Z</p>
           </div>
         </div>
         <div className='playlist' >

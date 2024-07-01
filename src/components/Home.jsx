@@ -1,73 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import Splide from '@splidejs/splide';
-import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
-import '@splidejs/splide/dist/css/splide.min.css';
-
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import '../index.css';
 
 const Home = () => {
-  const [images, setImages] = useState([]);
+  const [podcasts, setPodcasts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const fetchPodcasts = async () => {
       try {
-        const response = await fetch('https://your-api-endpoint.com/images');
+        const response = await fetch('https://podcast-api.netlify.app/');
         if (!response.ok) {
-          throw new Error('Failed to fetch images');
+          throw new Error(`Error fetching podcasts: ${response.statusText}`);
         }
-
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await response.json();
-          setImages(data);  // Assuming data is an array of image objects
-        } else {
-          throw new Error('Response is not in JSON format');
-        }
+        const data = await response.json();
+        console.log('Fetched podcasts data:', data);
+        setPodcasts(data);
       } catch (error) {
-        console.error('Error fetching images:', error);
+        console.error('Error fetching podcasts data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchImages();
+    fetchPodcasts();
   }, []);
 
-  useEffect(() => {
-    if (images.length > 0) {
-      const splide = new Splide('.splide', {
-        type: 'loop',
-        drag: 'free',
-        focus: 'center',
-        perPage: 3,
-        autoScroll: {
-          speed: 1,
-        },
-        breakpoints: {
-          640: {
-            perPage: 1,
-          },
-          1024: {
-            perPage: 2,
-          },
-        },
-      });
-
-      splide.mount({ AutoScroll });
-    }
-  }, [images]);
+  if (loading) return <div>Loading...</div>;
+  if (!podcasts.length) return <div>No podcasts available</div>;
 
   return (
-    <div>
-      <h1>Featured Images</h1>
-      <div className="splide">
-        <div className="splide__track">
-          <ul className="splide__list">
-            {images.map((image, index) => (
-              <li className="splide__slide" key={index}>
-                <img src={image.url} alt={image.alt || 'Image'} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+    <div className="main-content">
+      <h1>Welcome! Explore our latest podcasts</h1>
+      <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>
+        {podcasts.map((podcast) => (
+          <div key={podcast.id}>
+            <img src={podcast.image} alt={podcast.title} />
+            <p className="legend">{podcast.title}</p>
+          </div>
+        ))}
+      </Carousel>
     </div>
   );
 };

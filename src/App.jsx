@@ -4,18 +4,20 @@ import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import Podcasts from './components/Podcasts';
 import Seasons from './components/Seasons';
-import Episodes from './components/Episodes'; // Import the Episodes component
+import Episodes from './components/Episodes';
 
 const App = () => (
   <Router>
     <div className="app">
       <Sidebar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/podcasts" element={<Podcasts />} />
-        <Route path="/seasons/:showId" element={<Seasons />} />
-        <Route path="/seasons/:showId/episodes/:seasonIndex" element={<Episodes />} /> {/* New route for Episodes */}
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/podcasts" element={<Podcasts />} />
+          <Route path="/seasons/:showId" element={<Seasons />} />
+          <Route path="/seasons/:showId/episodes/:seasonIndex" element={<Episodes />} />
+        </Routes>
+      </div>
     </div>
   </Router>
 );
