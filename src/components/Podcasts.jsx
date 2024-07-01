@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
-const Podcasts = ({ sortCriteria }) => {
+const Podcasts = ({ sortCriteria, searchTerm }) => {
   const [podcasts, setPodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Podcasts = ({ sortCriteria }) => {
         const data = await response.json();
         console.log('Fetched podcasts data:', data);
 
-        // Sorting logic based on sortCriteria
+        // Apply sorting logic based on sortCriteria
         let sortedPodcasts = [...data];
         switch (sortCriteria) {
           case 'az':
@@ -26,10 +26,27 @@ const Podcasts = ({ sortCriteria }) => {
           case 'za':
             sortedPodcasts.sort((a, b) => b.title.localeCompare(a.title));
             break;
+          case 'oldest':
+            sortedPodcasts.sort((a, b) => new Date(a.updated) - new Date(b.updated));
+            break;
+          case 'newest':
+            sortedPodcasts.sort((a, b) => new Date(b.updated) - new Date(a.updated));
+            break;
+          case 'genres':
+            sortedPodcasts.sort((a, b) => a.genres.localeCompare(b.genres));
+            break;
           default:
             break;
         }
 
+        // Filter podcasts based on search term
+        if (searchTerm) {
+          sortedPodcasts = sortedPodcasts.filter(podcast =>
+            podcast.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
+
+        console.log('Sorted and filtered podcasts:', sortedPodcasts);
         setPodcasts(sortedPodcasts);
       } catch (error) {
         console.error('Error fetching podcasts data:', error);
@@ -39,7 +56,7 @@ const Podcasts = ({ sortCriteria }) => {
     };
 
     fetchPodcasts();
-  }, [sortCriteria]);
+  }, [sortCriteria, searchTerm]);
 
   const handlePodcastClick = (podcast) => {
     navigate(`/seasons/${podcast.id}`, { state: { description: podcast.description } });

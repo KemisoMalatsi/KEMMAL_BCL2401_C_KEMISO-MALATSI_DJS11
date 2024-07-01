@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import '../index.css';
 
-const Sidebar = ({ handleSort }) => {
+const Sidebar = ({ handleSort, handleSearch }) => {
   const navigate = useNavigate();
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const goToHome = () => navigate('/');
   const goToPodcasts = () => navigate('/podcasts');
@@ -13,6 +14,11 @@ const Sidebar = ({ handleSort }) => {
 
   const handleSortChange = (event) => {
     handleSort(event.target.value); // Passes the selected sort value to parent component
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value); // Update search term state
+    handleSearch(event.target.value); // Pass search term to parent component
   };
 
   return (
@@ -29,7 +35,13 @@ const Sidebar = ({ handleSort }) => {
         </div>
         {showSearchBar && (
           <div className='search-bar'>
-            <input type='text' placeholder='Search...' className='search-input' />
+            <input
+              type='text'
+              placeholder='Search...'
+              className='search-input'
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
           </div>
         )}
       </div>
