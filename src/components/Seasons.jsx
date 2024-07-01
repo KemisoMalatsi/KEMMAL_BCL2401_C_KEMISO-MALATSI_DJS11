@@ -47,7 +47,6 @@ const Seasons = () => {
             <div key={index} className="season-card" onClick={() => handleSeasonClick(index)}>
               <img src={season.image} alt={season.title} className="season-image" />
               <h3>{season.title}</h3>
-              <small>Updated: {new Date(season.updated).toLocaleDateString()}</small>
             </div>
           ))
         ) : (

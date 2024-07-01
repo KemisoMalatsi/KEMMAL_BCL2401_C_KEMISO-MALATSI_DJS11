@@ -46,7 +46,6 @@ const Episodes = () => {
         {episodes.map((episode) => (
           <div key={episode.id} className="episode-card">
             <h3>{episode.title}</h3>
-            <small>Updated: {new Date(episode.updated).toLocaleDateString()}</small>
             <p>{episode.description}</p>
             <audio controls onPlay={handlePlay}>
               <source src={episode.file} />
