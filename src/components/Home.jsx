@@ -38,7 +38,7 @@ const Home = () => {
 
   return (
     <div className="main-content">
-      <h1 className='h1'>Welcome!, Explore our latest Podcast</h1>
+      <h1 className='h1'>Welcome! Explore our latest Podcast</h1>
       <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>
         {podcasts.map((podcast) => (
           <div key={podcast.id} onClick={() => handlePodcastClick(podcast)} className="carousel-item">
