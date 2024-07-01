@@ -1,145 +1,149 @@
 /* Sidebar */
 .sidebar {
-    width: 25%;
-    height: 100%vh;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    color: white;
-  }
-  
+  width: 25%;
+  height: 100vh;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: white;
+  overflow-y: auto; 
+}
+
+.sidebar-lg {
+  display: none;
+}
+
+@media (min-width: 1024px) {
   .sidebar-lg {
-    display: none;
-  }
-  
-  @media (min-width: 1024px) {
-    .sidebar-lg {
-      display: flex;
-    }
-  }
-  
-  /* Top section styles */
-  .top-section {
-    background-color: #1DB954;
-    height: 15%;
-    border-radius: 0.5rem;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
   }
-  
-  .top-section-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding-left: 2rem;
-    cursor: pointer;
-  }
-  
-  .top-section-icon {
-    width: 1.5rem;
-  }
-  
-  .top-section-text {
-    font-weight: bold;
-  }
-  
-  
-  .bottom-section {
-    background-color: #1DB954;
-    height: 85%;
-    border-radius: 0.5rem;
-  }
-  
-  .bottom-section-content {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .bottom-section-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .bottom-section-icon-large {
-    width: 2rem;
-  }
-  
-  .bottom-section-icon-small {
-    width: 1.25rem;
-  }
-  
-  .bottom-section-text {
-    font-weight: 600;
-  }
-  
-  .playlist {
-    padding: 1rem;
-    background-color: #1DB954;
-    margin: 0.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0.25rem;
-    padding-left: 1rem;
-  }
-  
-  .playlist-light {
-    font-weight: 300;
-  }
-  
-  .favourite-button {
-    padding: 0.375rem 1rem;
-    background-color: white;
-    font-size: 15px;
-    color: black;
-    border-radius: 9999px;
-    margin-top: 1rem;
-  }
+}
 
-  .sort-a-button {
-    padding: 0.375rem 1rem;
-    background-color: white;
-    font-size: 15px;
-    color: black;
-    border-radius: 9999px;
-    margin-top: 1rem;
-  }
+/* Top section styles */
+.top-section {
+  background-color: #1DB954;
+  height: auto;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem 0; 
+}
 
-  .sort-z-button {
-    padding: 0.375rem 1rem;
-    background-color: white;
-    font-size: 15px;
-    color: black;
-    border-radius: 9999px;
-    margin-top: 1rem;
-  }
-  
-  .mt-4 {
-    margin-top: 1rem;
-  }
-  
-  .search-bar {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .search-input {
-    width: 80%;
-    height: 2.5rem; 
-    padding: 0.5rem; 
-    font-size: 1rem; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-  }
+.top-section-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-left: 2rem;
+  cursor: pointer;
+}
+
+.top-section-icon {
+  width: 1.5rem;
+}
+
+.top-section-text {
+  font-weight: bold;
+}
+
+
+.search-bar {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-input {
+  width: 80%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Bottom section styles */
+.bottom-section {
+  background-color: #1DB954;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.bottom-section-content {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottom-section-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bottom-section-icon-large {
+  width: 2rem;
+}
+
+.bottom-section-icon-small {
+  width: 1.25rem;
+}
+
+.bottom-section-text {
+  font-weight: 600;
+}
+
+.sort-section {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sort-label {
+  font-weight: bold;
+}
+
+.sort-dropdown {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.playlist {
+  padding: 1rem;
+  background-color: #1DB954;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.25rem;
+  padding-left: 1rem;
+}
+
+.playlist-light {
+  font-weight: 300;
+}
+
+.favourite-button {
+  padding: 0.375rem 1rem;
+  background-color: white;
+  font-size: 15px;
+  color: black;
+  border-radius: 9999px;
+  margin-top: 1rem;
+}
+
+
 
   /* Podcasts */
 
