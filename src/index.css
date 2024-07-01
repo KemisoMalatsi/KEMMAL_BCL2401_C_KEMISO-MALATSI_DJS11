@@ -469,11 +469,11 @@ Seasons
 
 .heart-icon {
   cursor: pointer;
-  color: grey;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
 .heart-icon.favorite {
   color: red;
 }
+
 
