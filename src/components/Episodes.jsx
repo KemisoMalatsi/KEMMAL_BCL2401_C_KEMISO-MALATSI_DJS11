@@ -52,7 +52,7 @@ const Episodes = () => {
     if (isFavorite) {
       updatedFavorites = favoriteEpisodes.filter((fav) => fav.episodeId !== episodeId);
     } else {
-      updatedFavorites = [...favoriteEpisodes, { ...episode, showId, seasonIndex, episodeId }];
+      updatedFavorites = [...favoriteEpisodes, { ...episode, showId, seasonIndex, episodeId, addedAt: new Date().toISOString() }];
     }
     setFavoriteEpisodes(updatedFavorites);
     localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
