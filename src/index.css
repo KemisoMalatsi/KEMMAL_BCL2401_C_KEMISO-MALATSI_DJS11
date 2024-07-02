@@ -485,3 +485,8 @@ Seasons
   margin-top: 1rem;
 }
 
+.my-favourite-h1, 
+.home-h1, .podcast-h1 {
+  text-align: center;
+}
+

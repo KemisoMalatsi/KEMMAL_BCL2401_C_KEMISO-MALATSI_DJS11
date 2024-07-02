@@ -67,7 +67,7 @@ const Podcasts = ({ sortCriteria, searchTerm }) => {
 
   return (
     <div className="main-content">
-      <h2>Podcasts</h2>
+      <h1 className='podcast-h1'>Podcasts</h1>  
       <div className="podcasts-grid">
         {podcasts.map((podcast) => (
           <div key={podcast.id} className="podcast-card" onClick={() => handlePodcastClick(podcast)}>

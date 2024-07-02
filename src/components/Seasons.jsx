@@ -43,7 +43,7 @@ const Seasons = () => {
 
   return (
     <div className="main-content">
-      <h2>Seasons</h2>
+      <h1 className='seasons-h1'>Seasons</h1>
       <button className="go-back-button" onClick={handleGoBack}>Go back to Podcast</button>
       {description && <p>{description}</p>}
       <div className="seasons-grid">
