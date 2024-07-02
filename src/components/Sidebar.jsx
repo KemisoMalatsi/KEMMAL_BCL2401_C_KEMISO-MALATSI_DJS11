@@ -20,6 +20,7 @@ const Sidebar = ({ handleSort, handleSearch }) => {
 
   const goToHome = () => navigate('/');
   const goToPodcasts = () => navigate('/podcasts');
+  const goToFavourites = () => navigate('/myfavourites'); // Function to navigate to My Favourites
 
   const handleSortChange = (event) => {
     handleSort(event.target.value); // Passes the selected sort value to parent component
@@ -83,7 +84,7 @@ const Sidebar = ({ handleSort, handleSearch }) => {
         <div className='playlist'>
           <h1>Create your first playlist</h1>
           <p className='playlist-light'>It's easy, we will help you</p>
-          <button className='favourite-button'>My Favourites</button>
+          <button className='favourite-button' onClick={goToFavourites}>My Favourites</button>
         </div>
         <div className='playlist mt-4'>
           <h1>Let's find some podcasts to follow</h1>

@@ -476,4 +476,12 @@ Seasons
   color: red;
 }
 
+.go-back-button {
+  padding: 0.375rem 1rem;
+  background-color: white;
+  font-size: 15px;
+  color: #1DB954;
+  border-radius: 9999px;
+  margin-top: 1rem;
+}
 
