@@ -13,13 +13,13 @@ const MyFavourites = () => {
   }, []);
 
   const removeFavorite = (episode) => {
-    const updatedFavorites = favoriteEpisodes.filter((fav) => fav.id !== episode.id);
+    const updatedFavorites = favoriteEpisodes.filter((fav) => fav.episodeId !== episode.episodeId);
     setFavoriteEpisodes(updatedFavorites);
     localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
   };
 
   const handleEpisodeClick = (episode) => {
-    navigate(`/seasons/${episode.showId}`, { state: { description: episode.description } });
+    navigate(`/seasons/${episode.showId}/episodes/${episode.seasonIndex}`, { state: { description: episode.description } });
   };
 
   if (!favoriteEpisodes.length) return <div>No favorite episodes available</div>;
@@ -29,7 +29,7 @@ const MyFavourites = () => {
       <h2>My Favourite Episodes</h2>
       <div className="episodes-grid">
         {favoriteEpisodes.map((episode, index) => (
-          <div key={episode.episode || index} className="episode-card">
+          <div key={episode.episodeId || index} className="episode-card">
             <h3>{episode.title}</h3>
             <p>{episode.description}</p>
             <audio controls>

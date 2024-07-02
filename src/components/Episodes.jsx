@@ -46,12 +46,13 @@ const Episodes = () => {
   };
 
   const toggleFavorite = (episode) => {
-    const isFavorite = favoriteEpisodes.some((fav) => fav.id === episode.id);
+    const episodeId = `${showId}-${seasonIndex}-${episode.episode}`;
+    const isFavorite = favoriteEpisodes.some((fav) => fav.episodeId === episodeId);
     let updatedFavorites;
     if (isFavorite) {
-      updatedFavorites = favoriteEpisodes.filter((fav) => fav.id !== episode.id);
+      updatedFavorites = favoriteEpisodes.filter((fav) => fav.episodeId !== episodeId);
     } else {
-      updatedFavorites = [...favoriteEpisodes, episode];
+      updatedFavorites = [...favoriteEpisodes, { ...episode, showId, seasonIndex, episodeId }];
     }
     setFavoriteEpisodes(updatedFavorites);
     localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
@@ -78,7 +79,7 @@ const Episodes = () => {
               Your browser does not support the audio element.
             </audio>
             <FaHeart
-              className={`heart-icon ${favoriteEpisodes.some(fav => fav.episode === episode.episode) ? 'favorite' : ''}`}
+              className={`heart-icon ${favoriteEpisodes.some(fav => fav.episodeId === `${showId}-${seasonIndex}-${episode.episode}`) ? 'favorite' : ''}`}
               onClick={() => toggleFavorite(episode)}
             />
           </div>
