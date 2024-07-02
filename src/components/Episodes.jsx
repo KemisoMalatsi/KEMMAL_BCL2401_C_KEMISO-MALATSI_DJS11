@@ -6,7 +6,7 @@ import '../index.css';
 
 const Episodes = () => {
   const { showId, seasonIndex } = useParams();
-  const navigate = useNavigate(); // Add the useNavigate hook
+  const navigate = useNavigate();
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentAudio, setCurrentAudio] = useState(null);
