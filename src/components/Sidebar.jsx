@@ -1,3 +1,4 @@
+// Sidebar.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { assets } from '../assets/assets';
@@ -10,7 +11,7 @@ const Sidebar = ({ handleSort, handleSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    // Only show search bar if the user is on the Podcasts page
+    // Show search bar only when on the Podcasts page
     setShowSearchBar(location.pathname === '/podcasts');
   }, [location.pathname]);
 
@@ -18,12 +19,12 @@ const Sidebar = ({ handleSort, handleSearch }) => {
   const goToPodcasts = () => navigate('/podcasts');
 
   const handleSortChange = (event) => {
-    handleSort(event.target.value); // Passes the selected sort value to parent component
+    handleSort(event.target.value); // Pass selected sort value to parent component
   };
 
   const handleSearchChange = (event) => {
-    const term = event.target.value; // Update search term state
-    setSearchTerm(term); // Update local state
+    const term = event.target.value; // Get search input value
+    setSearchTerm(term); // Update local state with search term
     handleSearch(term); // Pass search term to parent component
   };
 
@@ -48,7 +49,7 @@ const Sidebar = ({ handleSort, handleSearch }) => {
               placeholder='Search...'
               className='search-input'
               value={searchTerm}
-              onChange={handleSearchChange}
+              onChange={handleSearchChange} // Call handleSearchChange on input change
             />
           </div>
         )}
