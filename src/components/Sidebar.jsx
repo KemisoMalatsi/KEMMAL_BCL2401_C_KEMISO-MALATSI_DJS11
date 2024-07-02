@@ -11,24 +11,20 @@ const Sidebar = ({ handleSort, handleSearch }) => {
 
   useEffect(() => {
     // Only show search bar if the user is on the Podcasts page
-    if (location.pathname === '/podcasts') {
-      setShowSearchBar(true);
-    } else {
-      setShowSearchBar(false);
-    }
+    setShowSearchBar(location.pathname === '/podcasts');
   }, [location.pathname]);
 
   const goToHome = () => navigate('/');
   const goToPodcasts = () => navigate('/podcasts');
-  const goToFavourites = () => navigate('/myfavourites'); // Function to navigate to My Favourites
 
   const handleSortChange = (event) => {
     handleSort(event.target.value); // Passes the selected sort value to parent component
   };
 
   const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value); // Update search term state
-    handleSearch(event.target.value); // Pass search term to parent component
+    const term = event.target.value; // Update search term state
+    setSearchTerm(term); // Update local state
+    handleSearch(term); // Pass search term to parent component
   };
 
   return (
@@ -39,7 +35,7 @@ const Sidebar = ({ handleSort, handleSearch }) => {
           <img className='top-section-icon' src={assets.home_icon} alt='Home' />
           <p className='top-section-text'>Home</p>
         </div>
-        {location.pathname === '/podcasts' && (
+        {showSearchBar && (
           <div className='top-section-item' onClick={() => setShowSearchBar(!showSearchBar)}>
             <img className='top-section-icon' src={assets.search_icon} alt='Search' />
             <p className='top-section-text'>Search</p>
@@ -84,7 +80,9 @@ const Sidebar = ({ handleSort, handleSearch }) => {
         <div className='playlist'>
           <h1>Create your first playlist</h1>
           <p className='playlist-light'>It's easy, we will help you</p>
-          <button className='favourite-button' onClick={goToFavourites}>My Favourites</button>
+          <button className='favourite-button' onClick={() => navigate('/my-favourites')}>
+            My Favourites
+          </button>
         </div>
         <div className='playlist mt-4'>
           <h1>Let's find some podcasts to follow</h1>

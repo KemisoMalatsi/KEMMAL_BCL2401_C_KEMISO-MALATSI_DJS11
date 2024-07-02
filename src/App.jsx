@@ -5,7 +5,7 @@ import Home from './components/Home';
 import Podcasts from './components/Podcasts';
 import Seasons from './components/Seasons';
 import Episodes from './components/Episodes';
-import MyFavourites from './components/MyFavourites.jsx'; // Import the MyFavourites component
+import MyFavourites from './components/MyFavourites';
 import './index.css';
 
 const App = () => (
@@ -18,7 +18,7 @@ const App = () => (
           <Route path="/podcasts" element={<Podcasts />} />
           <Route path="/seasons/:showId" element={<Seasons />} />
           <Route path="/seasons/:showId/episodes/:seasonIndex" element={<Episodes />} />
-          <Route path="/myfavourites" element={<MyFavourites />} /> {/* Add the route for My Favourites */}
+          <Route path="/myfavourites" element={<MyFavourites />} />
         </Routes>
       </div>
     </div>

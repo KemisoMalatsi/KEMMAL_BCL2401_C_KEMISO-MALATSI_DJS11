@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { assets } from '../assets/assets';
 import { FaHeart } from 'react-icons/fa';
+import { assets } from '../assets/assets';
 import '../index.css';
 
 const Episodes = () => {
@@ -33,6 +33,11 @@ const Episodes = () => {
     fetchEpisodes();
   }, [showId, seasonIndex]);
 
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favoriteEpisodes')) || [];
+    setFavoriteEpisodes(storedFavorites);
+  }, []);
+
   const handlePlay = (event) => {
     if (currentAudio && currentAudio !== event.target) {
       currentAudio.pause();
@@ -40,12 +45,16 @@ const Episodes = () => {
     setCurrentAudio(event.target);
   };
 
-  const toggleFavorite = (episodeId) => {
-    setFavoriteEpisodes((prevFavorites) =>
-      prevFavorites.includes(episodeId)
-        ? prevFavorites.filter((id) => id !== episodeId)
-        : [...prevFavorites, episodeId]
-    );
+  const toggleFavorite = (episode) => {
+    const isFavorite = favoriteEpisodes.some((fav) => fav.id === episode.id);
+    let updatedFavorites;
+    if (isFavorite) {
+      updatedFavorites = favoriteEpisodes.filter((fav) => fav.id !== episode.id);
+    } else {
+      updatedFavorites = [...favoriteEpisodes, episode];
+    }
+    setFavoriteEpisodes(updatedFavorites);
+    localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
   };
 
   const handleGoBack = () => {
@@ -58,7 +67,7 @@ const Episodes = () => {
   return (
     <div className="main-content">
       <h2>Episodes</h2>
-      <button onClick={handleGoBack} className="go-back-button" src={assets.arrow_left}>Go Back to Seasons</button> 
+      <button onClick={handleGoBack} className="go-back-button">Go Back to Seasons</button> 
       <div className="episodes-grid">
         {episodes.map((episode, index) => (
           <div key={episode.episode || index} className="episode-card">
@@ -69,8 +78,8 @@ const Episodes = () => {
               Your browser does not support the audio element.
             </audio>
             <FaHeart
-              className={`heart-icon ${favoriteEpisodes.includes(episode.episode) ? 'favorite' : ''}`}
-              onClick={() => toggleFavorite(episode.episode)}
+              className={`heart-icon ${favoriteEpisodes.some(fav => fav.episode === episode.episode) ? 'favorite' : ''}`}
+              onClick={() => toggleFavorite(episode)}
             />
           </div>
         ))}
