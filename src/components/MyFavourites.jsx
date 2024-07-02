@@ -22,6 +22,11 @@ const MyFavourites = () => {
     navigate(`/seasons/${episode.showId}/episodes/${episode.seasonIndex}`, { state: { description: episode.description } });
   };
 
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleString(); // Format date and time
+  };
+
   if (!favoriteEpisodes.length) return <div>No favorite episodes available</div>;
 
   return (
@@ -36,6 +41,7 @@ const MyFavourites = () => {
               <source src={episode.file} />
               Your browser does not support the audio element.
             </audio>
+            <p>Added at: {formatDate(episode.addedAt)}</p>
             <FaTrash
               className="trash-icon"
               onClick={() => removeFavorite(episode)}
