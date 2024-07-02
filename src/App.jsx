@@ -9,21 +9,25 @@ import MyFavourites from './components/MyFavourites';
 import './index.css';
 
 const App = () => {
+  const [sortCriteria, setSortCriteria] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
+  const handleSort = (sort) => {
+    setSortCriteria(sort);
+  };
+
   const handleSearch = (term) => {
-    setSearchTerm(term); // Update state with search term
-    // Optionally, implement logic to filter podcasts based on search term
+    setSearchTerm(term);
   };
 
   return (
     <Router>
       <div className="app">
-        <Sidebar handleSearch={handleSearch} /> {/* Pass handleSearch as a prop */}
+        <Sidebar handleSort={handleSort} handleSearch={handleSearch} />
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/podcasts" element={<Podcasts searchTerm={searchTerm} />} /> {/* Pass searchTerm to Podcasts */}
+            <Route path="/podcasts" element={<Podcasts sortCriteria={sortCriteria} searchTerm={searchTerm} />} />
             <Route path="/seasons/:showId" element={<Seasons />} />
             <Route path="/seasons/:showId/episodes/:seasonIndex" element={<Episodes />} />
             <Route path="/myfavourites" element={<MyFavourites />} />

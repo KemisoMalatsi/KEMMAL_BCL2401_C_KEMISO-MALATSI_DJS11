@@ -1,4 +1,3 @@
-// Sidebar.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { assets } from '../assets/assets';
@@ -81,7 +80,7 @@ const Sidebar = ({ handleSort, handleSearch }) => {
         <div className='playlist'>
           <h1>Create your first playlist</h1>
           <p className='playlist-light'>It's easy, we will help you</p>
-          <button className='favourite-button' onClick={() => navigate('/my-favourites')}>
+          <button className='favourite-button' onClick={() => navigate('/myfavourites')}>
             My Favourites
           </button>
         </div>
