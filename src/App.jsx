@@ -6,6 +6,7 @@ import Podcasts from './components/Podcasts';
 import Seasons from './components/Seasons';
 import Episodes from './components/Episodes';
 import MyFavourites from './components/MyFavourites';
+import 'boxicons/css/boxicons.min.css'
 import './index.css';
 
 const App = () => {
