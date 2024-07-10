@@ -3,11 +3,24 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import '../index.css';
 
-const Sidebar = ({ handleSort, handleSearch }) => {
+const Sidebar = ({ handleSort, handleSearch, handleGenreFilter }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState('');
+
+  const genresMapping = {
+    1: 'Personal Growth',
+    2: 'Investigative Journalism',
+    3: 'History',
+    4: 'Comedy',
+    5: 'Entertainment',
+    6: 'Business',
+    7: 'Fiction',
+    8: 'News',
+    9: 'Kids and Family'
+  };
 
   useEffect(() => {
     // Show search bar only when on the Podcasts page
@@ -25,6 +38,12 @@ const Sidebar = ({ handleSort, handleSearch }) => {
     const term = event.target.value; // Get search input value
     setSearchTerm(term); // Update local state with search term
     handleSearch(term); // Pass search term to parent component
+  };
+
+  const handleGenreChange = (event) => {
+    const genreId = event.target.value;
+    setSelectedGenre(genreId); // Update selected genre state
+    handleGenreFilter(genreId); // Trigger filter by genre in parent component
   };
 
   return (
@@ -72,7 +91,16 @@ const Sidebar = ({ handleSort, handleSearch }) => {
             <option value='za'>Sort Z-A</option>
             <option value='oldest'>Oldest to Newest</option>
             <option value='newest'>Newest to Oldest</option>
-            <option value='genres'>Genres</option>
+          </select>
+
+          <label htmlFor='genre-dropdown' className='sort-label'>Genres:</label>
+          <select id='genre-dropdown' className='sort-dropdown' onChange={handleGenreChange}>
+            <option value=''>All Genres</option>
+            {Object.entries(genresMapping).map(([id, title]) => (
+              <option key={id} value={id}>
+                {title}
+              </option>
+            ))}
           </select>
         </div>
 

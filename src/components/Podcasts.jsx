@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
-const Podcasts = ({ sortCriteria, searchTerm }) => {
+const Podcasts = ({ sortCriteria, searchTerm, selectedGenre }) => {
   const [podcasts, setPodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -32,9 +32,6 @@ const Podcasts = ({ sortCriteria, searchTerm }) => {
           case 'newest':
             sortedPodcasts.sort((a, b) => new Date(b.updated) - new Date(a.updated));
             break;
-          case 'genres':
-            sortedPodcasts.sort((a, b) => a.genres.localeCompare(b.genres));
-            break;
           default:
             break;
         }
@@ -43,6 +40,13 @@ const Podcasts = ({ sortCriteria, searchTerm }) => {
         if (searchTerm) {
           sortedPodcasts = sortedPodcasts.filter(podcast =>
             podcast.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
+
+        // Filter podcasts based on selected genre
+        if (selectedGenre) {
+          sortedPodcasts = sortedPodcasts.filter(podcast =>
+            podcast.genres && podcast.genres.includes(parseInt(selectedGenre))
           );
         }
 
@@ -56,7 +60,7 @@ const Podcasts = ({ sortCriteria, searchTerm }) => {
     };
 
     fetchPodcasts();
-  }, [sortCriteria, searchTerm]);
+  }, [sortCriteria, searchTerm, selectedGenre]);
 
   const handlePodcastClick = (podcast) => {
     navigate(`/seasons/${podcast.id}`, { state: { description: podcast.description } });
