@@ -27,6 +27,12 @@ const MyFavourites = () => {
     return date.toLocaleString(); // Format date and time
   };
 
+  const formatTime = (seconds) => {
+    const date = new Date(0);
+    date.setSeconds(seconds);
+    return date.toISOString().substr(11, 8); // HH:mm:ss format
+  };
+
   if (!favoriteEpisodes.length) return <div>No favorite episodes available</div>;
 
   return (
@@ -42,6 +48,7 @@ const MyFavourites = () => {
               Your browser does not support the audio element.
             </audio>
             <p>Added at: {formatDate(episode.addedAt)}</p>
+            <p>Last listened at: {localStorage.getItem(`timestamp-${episode.episodeId}`) ? formatTime(localStorage.getItem(`timestamp-${episode.episodeId}`)) : 'Not started'}</p>
             <FaTrash
               className="trash-icon"
               onClick={() => removeFavorite(episode)}

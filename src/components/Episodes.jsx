@@ -43,6 +43,16 @@ const Episodes = () => {
       currentAudio.pause();
     }
     setCurrentAudio(event.target);
+    const episodeId = event.target.getAttribute('data-episode-id');
+    const savedTime = localStorage.getItem(`timestamp-${episodeId}`);
+    if (savedTime) {
+      event.target.currentTime = savedTime;
+    }
+  };
+
+  const handlePause = (event) => {
+    const episodeId = event.target.getAttribute('data-episode-id');
+    localStorage.setItem(`timestamp-${episodeId}`, event.target.currentTime);
   };
 
   const toggleFavorite = (episode) => {
@@ -62,6 +72,12 @@ const Episodes = () => {
     navigate(`/seasons/${showId}`);
   };
 
+  const formatTime = (seconds) => {
+    const date = new Date(0);
+    date.setSeconds(seconds);
+    return date.toISOString().substr(11, 8); // HH:mm:ss format
+  };
+
   if (loading) return <div>Loading...</div>;
   if (!episodes.length) return <div>No episodes available</div>;
 
@@ -74,7 +90,12 @@ const Episodes = () => {
           <div key={episode.episode || index} className="episode-card">
             <h3>{episode.title}</h3>
             <p>{episode.description}</p>
-            <audio controls onPlay={handlePlay}>
+            <audio 
+              controls 
+              onPlay={handlePlay} 
+              onPause={handlePause}
+              data-episode-id={`${showId}-${seasonIndex}-${episode.episode}`}
+            >
               <source src={episode.file} />
               Your browser does not support the audio element.
             </audio>
@@ -82,6 +103,7 @@ const Episodes = () => {
               className={`heart-icon ${favoriteEpisodes.some(fav => fav.episodeId === `${showId}-${seasonIndex}-${episode.episode}`) ? 'favorite' : ''}`}
               onClick={() => toggleFavorite(episode)}
             />
+            <p>Last listened at: {localStorage.getItem(`timestamp-${showId}-${seasonIndex}-${episode.episode}`) ? formatTime(localStorage.getItem(`timestamp-${showId}-${seasonIndex}-${episode.episode}`)) : 'Not started'}</p>
           </div>
         ))}
       </div>
