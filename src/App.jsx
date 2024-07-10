@@ -9,9 +9,9 @@ import MyFavourites from './components/MyFavourites';
 import './index.css';
 
 const App = () => {
-  const [sortCriteria, setSortCriteria] = useState('');
+  const [sortCriteria, setSortCriteria] = useState('az'); // Default sorting to 'az'
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedGenre, setSelectedGenre] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState(''); // Ensure this line is included
 
   const handleSort = (sort) => {
     setSortCriteria(sort);
@@ -21,29 +21,18 @@ const App = () => {
     setSearchTerm(term);
   };
 
-  const handleGenreFilter = (genre) => {
-    setSelectedGenre(genre);
+  const handleGenreFilter = (genreId) => {
+    setSelectedGenre(genreId);
   };
 
   return (
     <Router>
       <div className="app">
-        <Sidebar 
-          handleSort={handleSort} 
-          handleSearch={handleSearch} 
-          handleGenreFilter={handleGenreFilter} 
-        />
+        <Sidebar handleSort={handleSort} handleSearch={handleSearch} handleGenreFilter={handleGenreFilter} />
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route 
-              path="/podcasts" 
-              element={<Podcasts 
-                sortCriteria={sortCriteria} 
-                searchTerm={searchTerm} 
-                selectedGenre={selectedGenre} 
-              />} 
-            />
+            <Route path="/podcasts" element={<Podcasts sortCriteria={sortCriteria} searchTerm={searchTerm} selectedGenre={selectedGenre} />} />
             <Route path="/seasons/:showId" element={<Seasons />} />
             <Route path="/seasons/:showId/episodes/:seasonIndex" element={<Episodes />} />
             <Route path="/myfavourites" element={<MyFavourites />} />
