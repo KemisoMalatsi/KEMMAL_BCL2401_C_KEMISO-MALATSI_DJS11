@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
 import '../index.css';
 
-const MyFavourites = () => {
+const MyFavourites = ({ sortCriteria, genreFilter }) => {
   const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
   const navigate = useNavigate();
 
@@ -11,6 +11,37 @@ const MyFavourites = () => {
     const storedFavorites = JSON.parse(localStorage.getItem('favoriteEpisodes')) || [];
     setFavoriteEpisodes(storedFavorites);
   }, []);
+
+  useEffect(() => {
+    if (favoriteEpisodes.length > 0) {
+      let sortedFavorites = [...favoriteEpisodes];
+
+      // Apply sorting based on sortCriteria
+      switch (sortCriteria) {
+        case 'az':
+          sortedFavorites.sort((a, b) => a.title.localeCompare(b.title));
+          break;
+        case 'za':
+          sortedFavorites.sort((a, b) => b.title.localeCompare(a.title));
+          break;
+        case 'oldest':
+          sortedFavorites.sort((a, b) => new Date(a.addedAt) - new Date(b.addedAt));
+          break;
+        case 'newest':
+          sortedFavorites.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
+          break;
+        default:
+          break;
+      }
+
+      // Apply genre filtering
+      if (genreFilter) {
+        sortedFavorites = sortedFavorites.filter(episode => episode.genres.includes(genreFilter));
+      }
+
+      setFavoriteEpisodes(sortedFavorites);
+    }
+  }, [sortCriteria, genreFilter]);
 
   const removeFavorite = (episode) => {
     const updatedFavorites = favoriteEpisodes.filter((fav) => fav.episodeId !== episode.episodeId);
