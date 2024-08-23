@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
@@ -15,10 +15,21 @@ const Podcasts = ({ sortCriteria, searchTerm, selectedGenre }) => {
           throw new Error(`Error fetching podcasts: ${response.statusText}`);
         }
         const data = await response.json();
-        console.log('Fetched podcasts data:', data);
+
+        // Fetch detailed data for each podcast to get the number of seasons
+        const detailedPodcasts = await Promise.all(
+          data.map(async (podcast) => {
+            const detailedResponse = await fetch(`https://podcast-api.netlify.app/id/${podcast.id}`);
+            const detailedData = await detailedResponse.json();
+            return {
+              ...podcast,
+              seasonsCount: detailedData.seasons.length, // Add the number of seasons to the podcast object
+            };
+          })
+        );
 
         // Apply sorting logic based on sortCriteria
-        let sortedPodcasts = [...data];
+        let sortedPodcasts = [...detailedPodcasts];
         switch (sortCriteria) {
           case 'az':
             sortedPodcasts.sort((a, b) => a.title.localeCompare(b.title));
@@ -50,7 +61,6 @@ const Podcasts = ({ sortCriteria, searchTerm, selectedGenre }) => {
           );
         }
 
-        console.log('Sorted and filtered podcasts:', sortedPodcasts);
         setPodcasts(sortedPodcasts);
       } catch (error) {
         console.error('Error fetching podcasts data:', error);
@@ -78,6 +88,7 @@ const Podcasts = ({ sortCriteria, searchTerm, selectedGenre }) => {
             <img src={podcast.image} alt={podcast.title} />
             <h3>{podcast.title}</h3>
             <small>Updated: {new Date(podcast.updated).toLocaleDateString()}</small>
+            <small>Seasons: {podcast.seasonsCount}</small> {/* Display the number of seasons */}
           </div>
         ))}
       </div>
