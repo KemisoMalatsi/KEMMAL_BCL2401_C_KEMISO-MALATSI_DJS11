@@ -321,20 +321,43 @@ Seasons
 
 .carousel-item {
   cursor: pointer;
+  display: flex;
+  justify-content: center; /* Center the carousel items */
+  align-items: center;
 }
 
 .carousel .slide img {
-  width: 30%;
+  width: 80%; /* Keep the width as previously adjusted */
+  max-width: 800px; /* Keep max-width for larger screens */
   height: auto;
-  max-height: 580px;
+  max-height: 500px; /* Adjust the max-height to align with the My Favourites button */
+  object-fit: cover;
+  border-radius: 8px; /* Keep the rounded corners for consistency */
+  margin: 0 auto; /* Center the image within the carousel item */
 }
 
 .carousel .legend {
   background: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 10px;
-  font-size: 1.2em;
+  font-size: 1em;
+  border-radius: 8px;
+  text-align: center;
 }
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .carousel .slide img {
+    max-height: 500px; /* Ensure the height is consistent on medium to large screens */
+  }
+}
+
+@media (max-width: 767px) {
+  .carousel .slide img {
+    max-height: 400px; /* Slightly reduce height for smaller screens */
+  }
+}
+
 
 
 .season-card {
