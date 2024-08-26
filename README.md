@@ -99,4 +99,4 @@ We welcome contributions to the Podcast App! If you have any ideas, suggestions,
 6. **Open a Pull Request**: Go to the original repository and open a pull request.
 
 
-[Netlify Link](https://kemiso-podcast-app.netlify.app/)
+[Netlify Link](https://kemmal-bcl-2401-c-kemiso-malatsi-djs-11.vercel.app/)
